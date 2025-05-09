@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Anniversary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Comic Neue', cursive;
+      background-image: url(natural-paper.png);
+      background-repeat: repeat;
+    }
+
+    .speech-bubble {
+      border: 3px solid rgb(255, 0, 200);
+      padding: 20px;
+      border-radius: 20px;
+      display: inline-block;
+      background-color: rgb(255, 255, 255);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    /* Additional Styling for Button */
+    .hidden {
+      display: none !important;
+    }
+
+    .image-size {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+  </style>
+</head>
+<body class="bg-pink-100 min-h-screen flex flex-col items-center justify-center p-6 space-y-10">
+
+  <!-- Baby Cat with Milk Bottle GIF -->
+  <img src="baby-cat-sipping-on-milk-bottle.png" class="w-40 h-40 rounded-full shadow-lg" id="catImg" />
+
+  <!-- Happy Anniversary Message -->
+  <div class="speech-bubble text-2xl text-center" id="annivMsg">
+    <p>Happy Anniversary<br><span class="text-red-500">my love ‪‪❤︎‬ </span></p>
+  </div>
+
+  <!-- Question -->
+  <div class="text-2xl mt-8" id="question">Do you love me?</div>
+
+  <!-- Buttons -->
+  <div class="flex space-x-4 relative" id="buttonWrapper">
+    <button id="yesBtn" class="bg-pink-500 text-white font-bold px-8 py-4 text-xl rounded-xl hover:bg-red-600 hover:scale-110 transition-transform duration-300 shadow-lg z-10">
+      YES
+    </button>
+    <button id="noBtn" class="bg-gray-300 text-black font-bold px-4 py-2 rounded-xl shadow transition-all duration-300 text-sm absolute top-0 left-40">
+      NO
+    </button>
+  </div>
+
+  <audio id="loveSound" src="I Love You Cute Baby Voice ｜ 2021 WhatsApp Status ｜ ❤❤❤😍❤❤❤.mp3"></audio>
+  
+  <!-- Kissing GIF (hidden initially) -->
+  <img id="kissGif" src="kiss.gif" class="hidden w-32 h-32 mt-6 animate-fade-in" />
+
+  <!-- Will You Marry Me Question (hidden initially) -->
+  <div id="marryQuestionWrapper" class="hidden text-center mt-6">
+    
+    <!-- "I LOVE YOU TOO MINE Sweetheart ❤️" message (only in second window) -->
+    <div id="loveMsg" class="text-4xl text-pink-600 font-bold text-center mb-4">
+      I LOVE YOU TOO MINE Sweet heart ❤️
+    </div>
+
+    <div class="text-2xl mb-4">Will you marry me?</div>
+    <div class="flex space-x-4 justify-center">
+      <button id="marryYesBtn" class="bg-green-500 text-white font-bold px-6 py-2 text-lg rounded-xl hover:bg-green-600 transition-transform duration-300 shadow-lg">
+        YES
+      </button>
+      <button id="marryNoBtn" class="bg-pink-500 text-white font-bold px-8 py-4 text-xl rounded-xl hover:bg-pink-600 transition-transform duration-300 shadow-lg">
+        NO
+      </button>
+    </div>
+  </div>
+
+  <!-- New window after marriage (hidden initially) -->
+  <div id="marriageWindow" class="hidden text-center mt-6">
+   
+    <div class="text-3xl text-pink-600 font-bold"> Now We're Married <br> Kukku oni 😋
+      
+    </div>
+     <a href="https://wa.link/ozxtp8"><button id="yesBtn" class="bg-pink-500 text-white font-bold px-8 py-4 text-xl rounded-xl bg-red-600 hover:scale-110 transition-transform duration-300 shadow-lg z-10">
+    ee mage kukku pelethaya 
+    </button></a>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+
+    yesBtn.addEventListener("click", () => {
+      // Hide all other elements from first window
+      document.getElementById("catImg").classList.add("hidden");
+      document.getElementById("annivMsg").classList.add("hidden");
+      document.getElementById("question").classList.add("hidden");
+      document.getElementById("buttonWrapper").classList.add("hidden");
+
+      // Show the "Will you marry me?" question and message
+      document.getElementById("marryQuestionWrapper").classList.remove("hidden");
+
+      // Play baby voice
+      const loveSound = document.getElementById("loveSound");
+      loveSound.play();
+    });
+
+    // Make the NO button avoid the cursor
+    noBtn.addEventListener("mouseenter", () => {
+      const container = noBtn.parentElement;
+      const newX = Math.floor(Math.random() * (container.offsetWidth - 60));
+      const newY = Math.floor(Math.random() * 80);
+      noBtn.style.transform = `translate(${newX}px, ${newY}px)`;
+    });
+
+    // Handle the "Will you marry me?" NO button
+    const marryNoBtn = document.getElementById("marryNoBtn");
+    marryNoBtn.addEventListener("mouseenter", () => {
+      const container = marryNoBtn.parentElement;
+      const newX = Math.floor(Math.random() * (container.offsetWidth - 60));
+      const newY = Math.floor(Math.random() * 80);
+      marryNoBtn.style.transform = `translate(${newX}px, ${newY}px)`;
+    });
+
+    // Handle the "Will you marry me?" YES button click
+    const marryYesBtn = document.getElementById("marryYesBtn");
+    marryYesBtn.addEventListener("click", () => {
+      // Hide the second window
+      document.getElementById("marryQuestionWrapper").classList.add("hidden");
+
+      // Show the new marriage window with text and image
+      document.getElementById("marriageWindow").classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
